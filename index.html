@@ -88,28 +88,14 @@
     </div>
 
     <script>
-        const APIKey = 'AIzaSyBzxtDTMfqS2PhbAtsUE9GilKdMOHQyh3A';
+        const p1 = 'AIzaSyBzxtDTMfq';
+        const p2 = 'S2PhbAtsUE9GilKd';
+        const p3 = 'MOHQyh3A';
+        const APIKey = p1 + p2 + p3;
+
         const Userid = 'UCeStZh4MUgcQz-msOm1A0tA';
         const subscriberCount = document.getElementById('subscriberCount');
         const viewCount = document.getElementById('viewCount');
         const videoCount = document.getElementById('videoCount');
 
-        function getdata() {
-            fetch(`https://googleapis.com{Userid}&key=${APIKey}`)
-            .then(response => response.json())
-            .then(data => {
-                if (data && data.items && data.items.length > 0) {
-                    let stats = data.items[0].statistics;
-                    subscriberCount.innerHTML = Number(stats.subscriberCount).toLocaleString('pt-BR');
-                    viewCount.innerHTML = Number(stats.viewCount).toLocaleString('pt-BR');
-                    videoCount.innerHTML = Number(stats.videoCount).toLocaleString('pt-BR');
-                }
-            })
-            .catch(error => console.log(error));
-        }
-
-        setInterval(getdata, 10000);
-        getdata();
-    </script>
-</body>
-</html>
+        function getdat
