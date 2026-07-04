@@ -89,7 +89,7 @@
 
     <script>
         const APIKey = 'AIzaSyBzxtDTMfqS2PhbAtsUE9GilKdMOHQyh3A';
-        const Userid = 'UC5uROQ0Cdn3OthwK_Y45ozg;
+        const Userid = 'UCeStZh4MUgcQz-msOm1A0tA';
         const subscriberCount = document.getElementById('subscriberCount');
         const viewCount = document.getElementById('viewCount');
         const videoCount = document.getElementById('videoCount');
@@ -98,7 +98,7 @@
             fetch(`https://googleapis.com{Userid}&key=${APIKey}`)
             .then(response => response.json())
             .then(data => {
-                if (data.items && data.items.length > 0) {
+                if (data && data.items && data.items.length > 0) {
                     let stats = data.items[0].statistics;
                     subscriberCount.innerHTML = Number(stats.subscriberCount).toLocaleString('pt-BR');
                     viewCount.innerHTML = Number(stats.viewCount).toLocaleString('pt-BR');
@@ -108,7 +108,7 @@
             .catch(error => console.log(error));
         }
 
-        setInterval(getdata, 5000);
+        setInterval(getdata, 10000);
         getdata();
     </script>
 </body>
