@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contador do YouTube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            width: 400px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            font-size: 1.6rem;
+            color: #ffffff;
+        }
+
+        .contador-box {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #2a2a2a;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #ff0000;
+        }
+
+        .titulo {
+            font-size: 0.9rem;
+            color: #aaaaaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .numero {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Estatísticas do Canal</h1>
+        
+        <div class="contador-box">
+            <div class="card">
+                <p class="titulo">Inscritos</p>
+                <div class="numero" id="subscriberCount">0</div>
+            </div>
+
+            <div class="card">
+                <p class="titulo">Visualizações</p>
+                <div class="numero" id="viewCount">0</div>
+            </div>
+
+            <div class="card">
+                <p class="titulo">Total de Vídeos</p>
+                <div class="numero" id="videoCount">0</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const APIKey = 'AIzaSyBSqY5iTca0tbT0rnM-gSyXTaOpmlgc4Zw';
+        const Userid = 'UC5uROQ0Cdn3OthwK_Y45ozg;
+        const subscriberCount = document.getElementById('subscriberCount');
+        const viewCount = document.getElementById('viewCount');
+        const videoCount = document.getElementById('videoCount');
+
+        function getdata() {
+            fetch(`https://googleapis.com{Userid}&key=${APIKey}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.items && data.items.length > 0) {
+                    let stats = data.items[0].statistics;
+                    subscriberCount.innerHTML = Number(stats.subscriberCount).toLocaleString('pt-BR');
+                    viewCount.innerHTML = Number(stats.viewCount).toLocaleString('pt-BR');
+                    videoCount.innerHTML = Number(stats.videoCount).toLocaleString('pt-BR');
+                }
+            })
+            .catch(error => console.log(error));
+        }
+
+        setInterval(getdata, 5000);
+        getdata();
+    </script>
+</body>
+</html>
